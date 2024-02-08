@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Weather from './Weather/Weather'
-
+//テスト
 const Choices = () => {
   const [PrefecturesData, setPrefecturesData] = useState([]);
   const [AreaData, setAreaData] = useState([]);
