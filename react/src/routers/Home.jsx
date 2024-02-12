@@ -7,11 +7,11 @@ const Home = () => {
     <>
       <Link to="/Choices">
         <section className="Keyvisual">
-          <img src="/img/logo.svg" alt="今日の空模様のロゴ" />
-          <img src="/img/kimg.png" alt="日本地図の画像" />
-          <h1>
-            <span>»</span>スタート<span>«</span>
-          </h1>
+          <div>
+            <img src="/logo.svg" alt="今日の空模様のロゴ" />
+            <img src="/mapofjapan.png" alt="日本地図の画像" />
+            <h1>»スタート«</h1>
+          </div>
         </section>
       </Link>
     </>

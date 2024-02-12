@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import Weather from './Weather/Weather'
-//テスト
+import Weather from './Weather/Weather';
+
 const Choices = () => {
   const [PrefecturesData, setPrefecturesData] = useState([]);
   const [AreaData, setAreaData] = useState([]);
+  const [AreaValue, setAreaValue] = useState('130010');
+  const [btn, setBtn] = useState(false);
+  const btnSwitch = () => {
+    setBtn(!btn);
+  }
   const RegionData = [
     { text: '北海道地方' },
     { text: '東北地方' },
@@ -56,48 +61,99 @@ const Choices = () => {
     let AreaChoices = [];
     if (index === 1) {
       AreaChoices = [...hokkaidouArea];
-    }  else if (index === 2) {
-      for(let i = AreaType[index-2].fcode; i <= AreaType[index-2].lcode; i++){
-        AreaChoices.push({ text: PrefecturesData[i], value: `0${i+1}0000` });
+    } else if (index === 2) {
+      for (
+        let i = AreaType[index - 2].fcode;
+        i <= AreaType[index - 2].lcode;
+        i++
+      ) {
+        AreaChoices.push({ text: PrefecturesData[i], value: `0${i + 1}0010` });
       }
-    }else if (index === 3) {
-      for(let i = AreaType[index-2].acode; i <= AreaType[index-2].bcode; i++){
-        AreaChoices.push({ text: PrefecturesData[i], value: `0${i+1}0000` });
+    } else if (index === 3) {
+      for (
+        let i = AreaType[index - 2].acode;
+        i <= AreaType[index - 2].bcode;
+        i++
+      ) {
+        AreaChoices.push({ text: PrefecturesData[i], value: `0${i + 1}0010` });
       }
-      for(let i = AreaType[index-2].ccode; i <= AreaType[index-2].dcode; i++){
-        AreaChoices.push({ text: PrefecturesData[i+2], value: `${i+3}0000` });
+      for (
+        let i = AreaType[index - 2].ccode;
+        i <= AreaType[index - 2].dcode;
+        i++
+      ) {
+        AreaChoices.push({
+          text: PrefecturesData[i + 2],
+          value: `${i + 3}0010`,
+        });
       }
-    }else if (index === 9) {
+    } else if (index === 9) {
       AreaChoices = [...okinawaArea];
-    }else if (index > 3) {
-      for(let i = AreaType[index-2].acode; i <= AreaType[index-2].bcode; i++){
-        AreaChoices.push({ text: PrefecturesData[i], value: `${i+1}0000` });
+    } else if (index === 8) {
+      for (
+        let i = AreaType[index - 2].acode;
+        i <= AreaType[index - 2].bcode;
+        i++
+      ) {
+        AreaChoices.push({ text: PrefecturesData[i], value: `${i + 1}0010` });
       }
-      for(let i = AreaType[index-2].ccode; i <= AreaType[index-2].ccode; i++){
-        AreaChoices.push({ text: PrefecturesData[i], value: `${i+1}0100` });
+      for (
+        let i = AreaType[index - 2].ccode;
+        i <= AreaType[index - 2].ccode;
+        i++
+      ) {
+        AreaChoices.push({ text: PrefecturesData[i], value: `${i + 1}0010` });
+      }
+    } else if (index > 3) {
+      for (
+        let i = AreaType[index - 2].fcode;
+        i <= AreaType[index - 2].lcode;
+        i++
+      ) {
+        AreaChoices.push({ text: PrefecturesData[i], value: `${i + 1}0010` });
       }
     }
     setAreaData(AreaChoices);
   };
+  const arase = (e) => {
+    const AreaIndex = e.target.selectedIndex;
+    const areaValueData = e.target.options[AreaIndex].value;
+    setAreaValue(areaValueData);
+  };
   return (
     <>
-      <form>
-        <h3>地方</h3>
-        <select onChange={AreaBtn}>
-          <option value="">選択してください</option>
-          {RegionData.map((data, index) => (
-            <option key={index}>{data.text}</option>
-          ))}
-        </select>
-        <h3>都道府県（地方）</h3>
-        <select>
-          <option value="">選択してください</option>
-          {AreaData.map((data, index) => (
-            <option value={data.value} key={index}>{data.text}</option>
-          ))}
-        </select>
+      <div className='formbg01' id={`${btn ? 'no' : '' }`}>
+        <img className='formimg01' src="../mapofjapan.png" alt="" />
+      </div>
+      <div className='box' id={`${btn ? 'no' : '' }`}>
+        <div className='formbg02'>
+          <img className='formimg02' src="../logo.svg" />
+        </div>
+      </div>
+      <form id={`${btn ? 'no' : '' }`}>
+        <section>
+          <h3>地方</h3>
+          <select onChange={AreaBtn}>
+            <option value="">選択してください</option>
+            {RegionData.map((data, index) => (
+              <option key={index}>{data.text}</option>
+            ))}
+          </select>
+        </section>
+        <section>
+          <h3>都道府県（地方）</h3>
+          <select onChange={arase}>
+            <option value="">選択してください</option>
+            {AreaData.map((data, index) => (
+              <option value={data.value} key={index}>
+                {data.text}
+              </option>
+            ))}
+          </select>
+        </section>
+          <div onClick={btnSwitch}>検索</div>
       </form>
-      <Weather/>
+      <Weather AreaValue={AreaValue} btn={btn} btnSwitch={btnSwitch} />
     </>
   );
 };
