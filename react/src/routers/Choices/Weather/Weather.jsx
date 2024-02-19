@@ -21,7 +21,7 @@ const Weather = ({ AreaValue, btn, btnSwitch }) => {
           <header>
             <img
               onClick={btnSwitch}
-              src="../../public/arrow.png"
+              src="../arrow.png"
             />
             <h3>{w.title}</h3>
           </header>
