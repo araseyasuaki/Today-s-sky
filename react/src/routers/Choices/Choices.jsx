@@ -151,7 +151,7 @@ const Choices = () => {
             ))}
           </select>
         </section>
-          <div onClick={btnSwitch}>検索</div>
+        <div onClick={btnSwitch}>検索</div>
       </form>
       <Weather AreaValue={AreaValue} btn={btn} btnSwitch={btnSwitch} />
     </>
