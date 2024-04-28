@@ -2,8 +2,11 @@
 * React
 ---
 #### 使用API
-* https://weather.tsukumijima.net/api/forecast/city/130010(天気API)
-* https://geoapi.heartrails.com/api/json?method=getPrefectures(都道府県API)
+* (天気API)
+* * https://weather.tsukumijima.net/api/forecast/city/130010
+
+* (都道府県API)
+* * https://geoapi.heartrails.com/api/json?method=getPrefectures
 ---
 今回はAPIを使い天気予報アプリを作りました。
 
